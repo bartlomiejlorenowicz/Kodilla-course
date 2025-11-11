@@ -1,7 +1,6 @@
 package com.kodilla.testing.weather.stub;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class WeatherForecast {
 
@@ -20,4 +19,30 @@ public class WeatherForecast {
         return resultMap;
     }
 
+    public double calculateAverageTemperatures() {
+        Map<String, Double> resultMap = temperatures.getTemperatures();
+        double sum = 0.0;
+        for (Map.Entry<String, Double> temperature : resultMap.entrySet()) {
+            sum += temperature.getValue();
+        }
+        return sum / resultMap.size();
+    }
+
+    public double calculateMedianTemperatures() {
+        Map<String, Double> resultMap = temperatures.getTemperatures();
+        List<Double> sorted = new ArrayList<>();
+
+        for (Map.Entry<String, Double> temperature : resultMap.entrySet()) {
+            sorted.add(temperature.getValue());
+        }
+
+        Collections.sort(sorted);
+
+        if (sorted.size() % 2 == 1) {
+            return sorted.get(sorted.size() / 2);
+        } else {
+            int middle = sorted.size() / 2;
+            return (sorted.get(middle - 1) + sorted.get(middle)) / 2.0;
+        }
+    }
 }
