@@ -1,4 +1,4 @@
-package com.kodilla.testing.shape;
+package com.kodilla.good.patterns.testing.shape;
 
 public interface Shape {
 
