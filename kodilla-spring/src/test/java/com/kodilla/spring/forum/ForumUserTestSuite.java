@@ -1,5 +1,7 @@
 package com.kodilla.spring.forum;
 
+import com.kodilla.spring.shape.Shape;
+import com.kodilla.spring.shape.Square;
 import org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
@@ -22,4 +24,17 @@ public class ForumUserTestSuite {
         //Then
         assertEquals("John Smith", username);
     }
+
+    @Test
+    void testSquareLoadedIntoContainer() {
+        //Given
+        ApplicationContext context =
+                new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Shape shape = context.getBean(Square.class);
+        //When
+        String name = shape.getShapeName();
+        //Then
+        assertEquals("This is a square.", name);
+    }
+
 }
