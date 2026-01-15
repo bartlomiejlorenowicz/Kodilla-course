@@ -28,7 +28,12 @@ public final class Library extends Prototype<Library> {
         Library clonedLibrary = new Library(this.name);
 
         for (Book book : this.books) {
-            clonedLibrary.getBooks().add(book);
+            Book clonedBook = new Book(
+                    book.getTitle(),
+                    book.getAuthor(),
+                    book.getPublicationDate()
+            );
+            clonedLibrary.getBooks().add(clonedBook);
         }
 
         return clonedLibrary;

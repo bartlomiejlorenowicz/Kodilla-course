@@ -34,5 +34,17 @@ public class LibraryTestSuite {
 
         assertSame(library.getBooks(), shallowClonedLibrary.getBooks());
         assertNotSame(library.getBooks(), deepClonedLibrary.getBooks());
+
+        Book originalBook = library.getBooks().stream()
+                .filter(b -> b.getTitle().equals("Pan Tadeusz"))
+                .findFirst()
+                .orElseThrow();
+
+        Book deepClonedBook = deepClonedLibrary.getBooks().stream()
+                .filter(b -> b.getTitle().equals("Pan Tadeusz"))
+                .findFirst()
+                .orElseThrow();
+
+        assertNotSame(originalBook, deepClonedBook);
     }
 }
