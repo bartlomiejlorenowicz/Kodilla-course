@@ -1,5 +1,7 @@
 package com.kodilla.stream.portfolio;
 
+import com.kodilla.good.patterns.prototype.Task;
+
 import java.util.LinkedList;
 import java.util.List;
 
