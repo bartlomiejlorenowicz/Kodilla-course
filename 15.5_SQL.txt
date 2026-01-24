@@ -1,0 +1,13 @@
+// add a new post to the POSTS
+INSERT INTO POSTS (USER_ID, BODY)
+VALUES (1, 'New post ');
+
+// update the body
+UPDATE POSTS
+SET BODY = 'To delete'
+WHERE ID = (SELECT MAX(ID) FROM POSTS);
+
+// delete the post
+DELETE FROM POSTS
+WHERE ID = (SELECT MAX(ID) FROM POSTS);
+
