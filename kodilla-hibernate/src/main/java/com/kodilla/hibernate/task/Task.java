@@ -8,6 +8,21 @@ import java.util.Date;
 
 @Entity
 @Table(name = "TASKS")
+@NamedQueries({
+        @NamedQuery(
+                name = "Task.retrieveLongTasks",
+                query = "FROM Task WHERE duration > 10"
+        ),
+        @NamedQuery(
+                name = "Task.retrieveShortTasks",
+                query = "FROM Task WHERE duration <= 10"
+        )
+})
+@NamedNativeQuery(
+        name = "Task.retrieveTasksWithEnoughTime",
+        query = "SELECT * FROM TASKS WHERE DURATION >= 10",
+        resultClass = Task.class
+)
 public class Task {
 
     private int id;
