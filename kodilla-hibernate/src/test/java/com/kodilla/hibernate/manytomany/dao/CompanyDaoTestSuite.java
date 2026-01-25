@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import com.kodilla.hibernate.manytomany.Employee;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @SpringBootTest
@@ -13,6 +16,9 @@ class CompanyDaoTestSuite {
 
     @Autowired
     private CompanyDao companyDao;
+
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @Test
     void testSaveManyToMany() {
@@ -58,5 +64,30 @@ class CompanyDaoTestSuite {
         //} catch (Exception e) {
         //    //do nothing
         //}
+    }
+
+    @Test
+    void testNamedQueries() {
+
+        // Given
+        Company c1 = companyDao.save(new Company("SoftServe"));
+        Company c2 = companyDao.save(new Company("Software Mind"));
+        Company c3 = companyDao.save(new Company("ABC Corp"));
+
+        Employee e1 = employeeDao.save(new Employee("John", "Smith"));
+        Employee e2 = employeeDao.save(new Employee("Kate", "Smith"));
+        Employee e3 = employeeDao.save(new Employee("Mike", "Brown"));
+
+        // When
+        List<Employee> smiths = employeeDao.retrieveEmployeesByLastname("Smith");
+        List<Company> companies = companyDao.findByFirstThreeLetters("Sof");
+
+        // Then
+        assertEquals(2, smiths.size());
+        assertEquals(2, companies.size());
+
+        // CleanUp
+        employeeDao.deleteAll();
+        companyDao.deleteAll();
     }
 }
